@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic
+google-genai
+python-dotenv
+reportlab
+python-multipart
+jinja2
+pytest
+httpx
