@@ -230,7 +230,16 @@ class ReportService:
 
         # --- SECTION 4: FRAMEWORK VALIDATION ---
         story.append(Paragraph("4. Framework Validation", h1_style))
-        for name, meta in report_data.validation.framework_meta.items():
+        
+        frameworks = [
+            ("lean_canvas", report_data.validation.framework_meta.lean_canvas),
+            ("swot", report_data.validation.framework_meta.swot),
+            ("porters_five_forces", report_data.validation.framework_meta.porters_five_forces),
+            ("jtbd", report_data.validation.framework_meta.jtbd),
+            ("value_proposition_canvas", report_data.validation.framework_meta.value_proposition_canvas)
+        ]
+        
+        for name, meta in frameworks:
             formatted_name = name.replace("_", " ").title()
             story.append(Paragraph(f"<b>Framework: {formatted_name}</b>", h2_style))
             story.append(Paragraph(f"<b>Reasoning:</b> {meta.reasoning}", body_style))

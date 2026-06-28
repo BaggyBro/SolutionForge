@@ -39,7 +39,7 @@ class ExecutionService:
             f"--- RESEARCH COST ESTIMATES ---\n"
             f"Research Cost Benchmarks: {', '.join([c.item + ' ($' + str(c.low_range) + ' - $' + str(c.high_range) + ')' for c in research.cost_estimates])}\n\n"
             f"--- VALIDATION RECOMMENDATIONS ---\n"
-            f"Framework Recommendations: {', '.join([rec for meta in validation.framework_meta.values() for rec in meta.recommendations])}\n\n"
+            f"Framework Recommendations: {', '.join([rec for meta in [validation.framework_meta.lean_canvas, validation.framework_meta.swot, validation.framework_meta.porters_five_forces, validation.framework_meta.jtbd, validation.framework_meta.value_proposition_canvas] for rec in meta.recommendations])}\n\n"
             f"Provide an actionable phase-by-phase breakdown for Days 1-30, Days 31-60, and Days 61-90, "
             f"a detailed budget (matching the cost estimates/ranges in USD), risks/mitigations, KPIs, and metrics."
         )
