@@ -21,6 +21,10 @@ class ReportInput(BaseModel):
     validation_data: ValidationResult
     execution_data: ExecutionResult
 
+class LLMReportResult(BaseModel):
+    executive_summary: str = Field(..., description="High-level executive summary of the project and execution plan")
+    markdown_report: str = Field(..., description="Full, comprehensive compiled Markdown report")
+
 class ReportResult(BaseModel):
     executive_summary: str = Field(..., description="High-level executive summary of the project and execution plan")
     markdown_report: str = Field(..., description="Full, comprehensive compiled Markdown report")

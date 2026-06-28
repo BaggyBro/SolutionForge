@@ -5,7 +5,7 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Tabl
 from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib import colors
 from app.services.gemini import GeminiService
-from app.models.report import FullReportData, ReportResult
+from app.models.report import FullReportData, ReportResult, LLMReportResult
 
 class ReportService:
     def __init__(self, gemini_service: GeminiService):
@@ -53,16 +53,19 @@ class ReportService:
         )
 
         # Call Gemini to get the executive summary and markdown report content
-        result = self.gemini_service.generate_structured(
+        llm_result = self.gemini_service.generate_structured(
             prompt=prompt,
-            response_schema=ReportResult,
+            response_schema=LLMReportResult,
             system_instruction=system_instruction,
             enable_search=False
         )
 
-        # Inject the full JSON data structure back into the result
-        result.json_report = full_data
-        return result
+        # Assemble the final result with the static JSON data
+        return ReportResult(
+            executive_summary=llm_result.executive_summary,
+            markdown_report=llm_result.markdown_report,
+            json_report=full_data
+        )
 
     def compile_pdf(self, report_data: FullReportData) -> bytes:
         """
