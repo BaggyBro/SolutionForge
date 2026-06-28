@@ -13,7 +13,7 @@ import {
   Calendar,
   FileText,
 } from "lucide-react";
-import { apiPost, exportPdf } from "@/lib/api";
+import { apiPost, exportPdf } from "../../lib/api";
 
 import DiscoveryTab from "./tabs/Discovery";
 import SolutionTab from "./tabs/Solution";

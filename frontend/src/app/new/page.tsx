@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { apiPost, DiscoveryResult } from "@/lib/api";
+import { apiPost, DiscoveryResult } from "../../lib/api";
 
 const FIELDS = [
   {

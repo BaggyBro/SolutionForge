@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
-import { exportPdf } from "@/lib/api";
+import { exportPdf } from "../../lib/api";
 
 function ReportViewerContent() {
   const router = useRouter();
