@@ -58,11 +58,17 @@ class ValidationInput(BaseModel):
     solution_data: SolutionResult = Field(..., description="Solution builder output")
     research_data: ResearchResult = Field(..., description="Research engine output")
 
+class AllFrameworkMeta(BaseModel):
+    lean_canvas: FrameworkMeta
+    swot: FrameworkMeta
+    porters_five_forces: FrameworkMeta
+    jtbd: FrameworkMeta
+    value_proposition_canvas: FrameworkMeta
+
 class ValidationResult(BaseModel):
     lean_canvas: LeanCanvas
     swot: SWOTAnalysis
     porters_five_forces: PortersFiveForces
     jtbd: JobsToBeDone
     value_proposition_canvas: ValuePropositionCanvas
-    framework_meta: Dict[str, FrameworkMeta] = Field(..., description="Meta notes keyed by framework name: 'lean_canvas', 'swot', 'porters_five_forces', 'jtbd', 'value_proposition_canvas'")
-
+    framework_meta: AllFrameworkMeta = Field(..., description="Meta notes for each framework")
