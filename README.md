@@ -103,3 +103,36 @@ To run backend unit tests:
 cd backend
 pytest
 ```
+
+---
+
+## Deployment on Render
+
+This project is structured as a monorepo, which can be deployed to Render as two separate services: a Web Service for the FastAPI backend and a Web Service (or Docker container) for the Next.js frontend.
+
+### 1. Deploy the Backend (FastAPI)
+
+1. **Create a new Web Service** on Render and connect it to your repository.
+2. Configure the following settings:
+   - **Root Directory**: `backend`
+   - **Runtime**: `Python` (or `Docker` since a `Dockerfile` is provided)
+   - **Build Command** (if using Python): `pip install -r requirements.txt`
+   - **Start Command** (if using Python): `uvicorn app.main:app --host 0.0.0.0 --port 8000`
+3. Add the following **Environment Variables** in the Render Dashboard:
+   - `GEMINI_API_KEY`: Your Google Gemini API key.
+   - `CORS_ORIGINS`: Set to `["*"]` or `["https://your-frontend-subdomain.onrender.com"]` to allow requests from your frontend.
+   - `PORT`: `8000`
+
+### 2. Deploy the Frontend (Next.js)
+
+1. **Create a new Web Service** on Render and connect it to your repository.
+2. Configure the following settings:
+   - **Root Directory**: `frontend`
+   - **Runtime**: `Node` (or `Docker` since a `Dockerfile` is provided)
+   - **Build Command** (if using Node): `npm run build`
+   - **Start Command** (if using Node): `npm run start`
+3. Add the following **Environment Variables** in the Render Dashboard **before** building:
+   - `NEXT_PUBLIC_API_URL`: The URL of your deployed backend Web Service (e.g., `https://your-backend-subdomain.onrender.com`).
+     > [!IMPORTANT]
+     > Next.js bakes environment variables starting with `NEXT_PUBLIC_` into the client-side JavaScript bundle **at build time**. Make sure `NEXT_PUBLIC_API_URL` is set in Render's environment settings *before* triggerring the build, otherwise it will fallback to `http://localhost:8000`.
+
